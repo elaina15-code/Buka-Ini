@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I LOVE YOU dalam Bentuk Hati</title>
+    <title>TikTok Love Animation</title>
     <style>
         * {
             margin: 0;
@@ -16,7 +16,9 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e);
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
         }
@@ -31,200 +33,201 @@
             flex-direction: column;
         }
         
-        .heart-shape {
-            position: relative;
-            width: 300px;
-            height: 270px;
-            margin-bottom: 30px;
-        }
-        
-        .heart-text {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
+        .love-text {
+            font-size: 4rem;
             font-weight: bold;
-            z-index: 2;
-            animation: text-pulse 2s infinite;
+            color: #ff3b3f;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            animation: textPulse 2s infinite;
+            text-align: center;
+            z-index: 10;
         }
         
-        .heart-text span {
-            display: block;
-            line-height: 1.2;
-            font-size: 2.8rem;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        .subtext {
+            font-size: 1.5rem;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            margin-top: 20px;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 2s;
+            text-align: center;
+            max-width: 80%;
+            z-index: 10;
         }
         
-        .heart-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .heart-bg:before,
-        .heart-bg:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 150px;
-            height: 240px;
-            border-radius: 75px 75px 0 0;
-            background: #ff3b3f;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .heart-bg:before {
-            left: 0;
-            transform: rotate(-45deg);
-            transform-origin: 100% 100%;
-        }
-        
-        .heart-bg:after {
-            left: 75px;
-            transform: rotate(45deg);
-            transform-origin: 0 100%;
-        }
-        
-        .floating-hearts {
+        .hearts-container {
             position: absolute;
             width: 100%;
             height: 100%;
+            overflow: hidden;
             pointer-events: none;
         }
         
-        .floating-heart {
+        .heart {
             position: absolute;
             bottom: -50px;
-            font-size: 20px;
+            font-size: 24px;
             color: #ff3b3f;
-            opacity: 0.7;
-            animation: float-up 15s linear infinite;
-        }
-        
-        .message {
-            margin-top: 40px;
-            text-align: center;
-            color: #ff3b3f;
-            font-size: 1.2rem;
-            max-width: 80%;
             opacity: 0;
-            animation: fade-in 3s forwards;
-            animation-delay: 2s;
+            animation: floatUp 15s linear infinite;
         }
         
-        @keyframes heartbeat {
+        .heart::before {
+            content: "❤";
+        }
+        
+        .floating-text {
+            position: absolute;
+            font-size: 1.2rem;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: floatText 12s linear infinite;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes floatText {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.8);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-80vh) translateX(20px) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes textPulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
         
-        @keyframes text-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes float-up {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes fade-in {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .heart-shape {
-            animation: heartbeat 1.2s infinite;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
         @media (max-width: 768px) {
-            .heart-shape {
-                width: 220px;
-                height: 200px;
+            .love-text {
+                font-size: 2.5rem;
             }
             
-            .heart-bg:before,
-            .heart-bg:after {
-                width: 110px;
-                height: 176px;
-                border-radius: 55px 55px 0 0;
-            }
-            
-            .heart-bg:after {
-                left: 55px;
-            }
-            
-            .heart-text span {
-                font-size: 2rem;
-            }
-            
-            .message {
-                font-size: 1rem;
+            .subtext {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="heart-shape">
-            <div class="heart-bg"></div>
-            <div class="heart-text">
-                <span>I</span>
-                <span>LOVE</span>
-                <span>YOU</span>
-            </div>
-        </div>
+        <div class="love-text">I LOVE YOU</div>
+        <div class="subtext">You are the reason my heart beats every day</div>
         
-        <div class="message">
-            Kata-kata kadang tidak cukup untuk mengungkapkan perasaan,<br>
-            tapi dari hatiku yang paling dalam, I LOVE YOU.
-        </div>
-        
-        <div class="floating-hearts"></div>
+        <div class="hearts-container" id="hearts-container"></div>
     </div>
 
     <script>
-        // Membuat hati-hati kecil yang mengambang
-        const floatingHearts = document.querySelector('.floating-hearts');
+        const heartsContainer = document.getElementById('hearts-container');
+        const messages = [
+            "Forever yours",
+            "Always & forever",
+            "My heart is yours",
+            "You complete me",
+            "Soulmates",
+            "Better together",
+            "Love of my life",
+            "Meant to be"
+        ];
         
-        function createFloatingHeart() {
+        // Create floating hearts
+        function createHeart() {
             const heart = document.createElement('div');
-            heart.classList.add('floating-heart');
-            heart.innerHTML = '❤';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 10 + 8) + 's';
-            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-            floatingHearts.appendChild(heart);
+            heart.classList.add('heart');
             
-            // Hapus elemen setelah animasi selesai
+            // Random properties
+            const left = Math.random() * 100;
+            const size = Math.random() * 20 + 10;
+            const duration = Math.random() * 10 + 10;
+            const delay = Math.random() * 5;
+            
+            heart.style.left = `${left}vw`;
+            heart.style.fontSize = `${size}px`;
+            heart.style.animationDuration = `${duration}s`;
+            heart.style.animationDelay = `${delay}s`;
+            
+            heartsContainer.appendChild(heart);
+            
+            // Remove element after animation completes
             setTimeout(() => {
                 heart.remove();
-            }, 15000);
+            }, (duration + delay) * 1000);
         }
         
-        // Buat hati-hati kecil setiap 300ms
-        setInterval(createFloatingHeart, 300);
+        // Create floating text messages
+        function createTextMessage() {
+            const text = document.createElement('div');
+            text.classList.add('floating-text');
+            
+            // Random properties
+            const left = Math.random() * 80 + 10;
+            const duration = Math.random() * 5 + 15;
+            const delay = Math.random() * 8;
+            const message = messages[Math.floor(Math.random() * messages.length)];
+            
+            text.textContent = message;
+            text.style.left = `${left}vw`;
+            text.style.animationDuration = `${duration}s`;
+            text.style.animationDelay = `${delay}s`;
+            text.style.color = `hsl(${Math.random() * 360}, 100%, 70%)`;
+            
+            heartsContainer.appendChild(text);
+            
+            // Remove element after animation completes
+            setTimeout(() => {
+                text.remove();
+            }, (duration + delay) * 1000);
+        }
         
-        // Buat beberapa hati saat halaman dimuat
+        // Create initial hearts
         for (let i = 0; i < 20; i++) {
-            setTimeout(createFloatingHeart, i * 100);
+            setTimeout(createHeart, i * 300);
+            setTimeout(createTextMessage, i * 800);
         }
+        
+        // Continue creating hearts and text
+        setInterval(createHeart, 500);
+        setInterval(createTextMessage, 1500);
     </script>
 </body>
 </html>
