@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animasi I Love You Berbentuk Hati</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .heart {
+            position: relative;
+            width: 280px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: heartbeat 1.2s infinite;
+        }
+        
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 144px;
+            height: 230px;
+            border-radius: 72px 72px 0 0;
+            background: #ff3b3f;
+        }
+        
+        .heart:before {
+            left: 0;
+            transform: rotate(-45deg);
+            transform-origin: 100% 100%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .heart:after {
+            left: 68px;
+            transform: rotate(45deg);
+            transform-origin: 0 100%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .text-container {
+            position: absolute;
+            text-align: center;
+            z-index: 2;
+            opacity: 0;
+            animation: text-appear 6s forwards;
+            animation-delay: 1.5s;
+        }
+        
+        .love-text {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtext {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #fff;
+            opacity: 0;
+            animation: fade-in 2s forwards;
+            animation-delay: 5s;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 20px;
+            color: #ff3b3f;
+            opacity: 0.7;
+            animation: float-up 15s linear infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes text-appear {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes float-up {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .heart {
+                width: 200px;
+                height: 180px;
+            }
+            
+            .heart:before,
+            .heart:after {
+                width: 104px;
+                height: 166px;
+                border-radius: 52px 52px 0 0;
+            }
+            
+            .heart:after {
+                left: 48px;
+            }
+            
+            .love-text {
+                font-size: 2rem;
+            }
+            
+            .subtext {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart"></div>
+        <div class="text-container">
+            <div class="love-text">I Love You</div>
+            <div class="subtext">Selamanya dan Untuk Selamanya</div>
+        </div>
+        <div class="floating-hearts"></div>
+    </div>
+
+    <script>
+        // Membuat hati-hati kecil yang mengambang
+        const floatingHearts = document.querySelector('.floating-hearts');
+        
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 10 + 8) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            floatingHearts.appendChild(heart);
+            
+            // Hapus elemen setelah animasi selesai
+            setTimeout(() => {
+                heart.remove();
+            }, 15000);
+        }
+        
+        // Buat hati-hati kecil setiap 300ms
+        setInterval(createFloatingHeart, 300);
+        
+        // Buat beberapa hati saat halaman dimuat
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createFloatingHeart, i * 100);
+        }
+    </script>
+</body>
+</html>
